@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O nama | Stomatolog Dejan Kalaba, Beograd</title>
+    <meta name="description" content="Dr Dejan Kalaba, stomatolog sa savršenim 5.0 na Google-u. Šumatovačka 18, Vračar, Beograd. Saznajte više o ordinaciji.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1a5276; --primary-light: #2471a3;
+            --accent: #148f77; --accent-light: #1abc9c;
+            --dark: #1c2833; --text: #2c3e50; --text-light: #5d6d7e;
+            --bg: #ffffff; --bg-soft: #f8f9fa;
+            --border: #e8ecf0; --radius: 16px;
+            --shadow: 0 4px 24px rgba(0,0,0,0.06);
+            --shadow-lg: 0 12px 48px rgba(0,0,0,0.1);
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--bg); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+        .nav { position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); z-index: 1000; border-bottom: 1px solid var(--border); }
+        .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+        .nav-inner { display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 72px; }
+        .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 600; color: var(--primary); text-decoration: none; }
+        .nav-logo span { color: var(--accent); }
+        .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--primary); }
+        .nav-cta { background: var(--primary); color: white !important; padding: 10px 24px; border-radius: 50px; font-weight: 600; }
+        .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+        .hamburger span { display: block; width: 24px; height: 2px; background: var(--dark); margin: 6px 0; transition: all 0.3s; }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+        .mobile-menu { display: none; position: fixed; top: 72px; left: 0; right: 0; background: white; border-bottom: 1px solid var(--border); padding: 24px; z-index: 999; box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
+        .mobile-menu.active { display: block; }
+        .mobile-menu a { display: block; padding: 12px 0; text-decoration: none; color: var(--text); font-size: 1rem; font-weight: 500; border-bottom: 1px solid var(--border); }
+        .mobile-menu a:last-child { border: none; }
+        .mobile-menu .mob-cta { display: block; text-align: center; background: var(--primary); color: white; padding: 14px; border-radius: 50px; margin-top: 16px; font-weight: 600; }
+
+        .page-hero { padding: 140px 0 60px; background: var(--bg-soft); text-align: center; }
+        .page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 700; color: var(--dark); margin-bottom: 16px; }
+        .page-hero p { font-size: 1.1rem; color: var(--text-light); max-width: 560px; margin: 0 auto; }
+
+        .section { padding: 80px 0; }
+
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+        .about-img { border-radius: var(--radius); overflow: hidden; aspect-ratio: 4/3; box-shadow: var(--shadow-lg); }
+        .about-img img { width: 100%; height: 100%; object-fit: cover; }
+        .about-text h2 { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: var(--dark); margin-bottom: 20px; line-height: 1.3; }
+        .about-text p { font-size: 1rem; color: var(--text-light); line-height: 1.8; margin-bottom: 16px; }
+
+        .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 64px; }
+        .value-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; text-align: center; transition: all 0.3s; }
+        .value-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: transparent; }
+        .value-icon { width: 56px; height: 56px; border-radius: 50%; background: var(--bg-soft); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+        .value-icon svg { width: 24px; height: 24px; stroke: var(--primary); fill: none; stroke-width: 2; }
+        .value-card h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 600; color: var(--dark); margin-bottom: 8px; }
+        .value-card p { font-size: 0.9rem; color: var(--text-light); line-height: 1.6; }
+
+        .numbers-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 64px; }
+        .number-block { text-align: center; padding: 32px; background: var(--bg-soft); border-radius: var(--radius); }
+        .number-block .big { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 700; color: var(--primary); line-height: 1; margin-bottom: 8px; }
+        .number-block .label { font-size: 0.9rem; color: var(--text-light); font-weight: 500; }
+
+        .cta-banner { background: var(--dark); color: white; padding: 64px 0; text-align: center; }
+        .cta-banner h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700; margin-bottom: 16px; }
+        .cta-banner p { font-size: 1rem; color: #aeb6bf; margin-bottom: 32px; max-width: 480px; margin-inline: auto; }
+        .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: white; padding: 14px 32px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.2s; }
+        .btn-primary:hover { background: var(--accent-light); transform: translateY(-2px); }
+
+        .footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; font-size: 0.85rem; color: var(--text-light); }
+        .footer a { color: var(--primary); text-decoration: none; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hamburger { display: block; }
+            .about-grid { grid-template-columns: 1fr; gap: 32px; }
+            .values-grid, .numbers-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<nav class="nav" id="nav">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">Dr Kalaba<span>.</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Početna</a></li>
+            <li><a href="usluge.html">Usluge</a></li>
+            <li><a href="o-nama.html" class="active">O nama</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
+            <li><a href="tel:+381641151975" class="nav-cta">Zakaži pregled</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Meni"><span></span><span></span><span></span></button>
+    </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Početna</a>
+    <a href="usluge.html">Usluge</a>
+    <a href="o-nama.html">O nama</a>
+    <a href="kontakt.html">Kontakt</a>
+    <a href="tel:+381641151975" class="mob-cta">Zakaži pregled</a>
+</div>
+
+<section class="page-hero">
+    <div class="container">
+        <h1>Ordinacija kojoj se veruje</h1>
+        <p>Savršen 5.0 na Google-u, nula negativnih recenzija. To se ne kupuje.</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="about-grid">
+            <div class="about-img">
+                <img src="photos/photo_01.jpg" alt="Ordinacija Dr Kalaba iznutra" loading="lazy">
+            </div>
+            <div class="about-text">
+                <h2>Dr Dejan Kalaba</h2>
+                <p>Pacijenti ga zovu Deki. Ivan kaže da je „druže, zubar, prijatelj. Profesionalac za najviše pohvale." Nenad dolazi godinama i dovodi celu porodicu. Marijana ga opisuje kao „izuzetnog stručnjaka i izuzetno dobrog čoveka."</p>
+                <p>Ordinacija u Šumatovačkoj 18 na Vračaru je moderna, svetla i opremljena savremenom opremom. Mermerne zidove, novu stolicu i čist prostor primetiš čim uđeš.</p>
+                <p>55 pacijenata je ostavilo recenziju. Svi su dali 5 od 5. To govori dovoljno.</p>
+            </div>
+        </div>
+
+        <div class="numbers-row">
+            <div class="number-block">
+                <div class="big">5.0</div>
+                <div class="label">Google ocena</div>
+            </div>
+            <div class="number-block">
+                <div class="big">55</div>
+                <div class="label">Recenzija</div>
+            </div>
+            <div class="number-block">
+                <div class="big">0</div>
+                <div class="label">Negativnih komentara</div>
+            </div>
+        </div>
+
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="value-icon">
+                    <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                </div>
+                <h3>Poverenje</h3>
+                <p>Nenad kaže: „Verujem mu za bilo koji problem." Poverenje se ne gradi reklamom, gradi se rezultatima.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">
+                    <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <h3>Profesionalizam</h3>
+                <p>Luka je napisao: „Naklon do poda, preporuka zauvek." Svaka intervencija se radi sa maksimalnom pažnjom.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">
+                    <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+                </div>
+                <h3>Porodična ordinacija</h3>
+                <p>Pacijenti dovode članove porodice. Deci i odraslima, pristup je isti: pažljiv, strpljiv, profesionalan.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-banner">
+    <div class="container">
+        <h2>Tvoj novi stomatolog čeka tvoj poziv</h2>
+        <p>Zakaži prvi pregled. Vidi sam zašto se svi vraćaju.</p>
+        <a href="tel:+381641151975" class="btn-primary">Pozovi: 064/115-1975</a>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <p>&copy; 2026 Stomatolog Dejan Kalaba. Sva prava zadržana.</p>
+        <p style="margin-top:8px;"><small>Sajt napravio <a href="https://nikolajanjic.com">Nikola Janjić</a></small></p>
+    </div>
+</footer>
+
+<script>
+    window.addEventListener('scroll', () => { document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 10); });
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => { hamburger.classList.toggle('active'); mobileMenu.classList.toggle('active'); });
+    mobileMenu.querySelectorAll('a').forEach(a => { a.addEventListener('click', () => { hamburger.classList.remove('active'); mobileMenu.classList.remove('active'); }); });
+</script>
+</body>
+</html>
