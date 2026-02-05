@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stomatolog Dejan Kalaba | Šumatovačka 18, Beograd</title>
+    <meta name="description" content="Stomatološka ordinacija Dr Dejan Kalaba. Savršen 5.0 na Google-u sa 55 recenzija. Šumatovačka 18, Vračar, Beograd. Zakažite pregled.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #1a5276;
+            --primary-light: #2471a3;
+            --accent: #148f77;
+            --accent-light: #1abc9c;
+            --dark: #1c2833;
+            --text: #2c3e50;
+            --text-light: #5d6d7e;
+            --bg: #ffffff;
+            --bg-soft: #f8f9fa;
+            --bg-warm: #fdfefe;
+            --border: #e8ecf0;
+            --radius: 16px;
+            --radius-sm: 10px;
+            --shadow: 0 4px 24px rgba(0,0,0,0.06);
+            --shadow-lg: 0 12px 48px rgba(0,0,0,0.1);
+        }
+
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+        /* NAV */
+        .nav {
+            position: fixed; top: 0; left: 0; right: 0;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+            transition: box-shadow 0.3s;
+        }
+        .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+        .nav-inner {
+            display: flex; align-items: center; justify-content: space-between;
+            max-width: 1200px; margin: 0 auto; padding: 0 24px;
+            height: 72px;
+        }
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem; font-weight: 600;
+            color: var(--primary); text-decoration: none;
+        }
+        .nav-logo span { color: var(--accent); }
+        .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+        .nav-links a {
+            text-decoration: none; color: var(--text); font-size: 0.9rem;
+            font-weight: 500; transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--primary); }
+        .nav-cta {
+            background: var(--primary); color: white !important;
+            padding: 10px 24px; border-radius: 50px; font-weight: 600;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .nav-cta:hover { background: var(--primary-light); transform: translateY(-1px); }
+
+        /* Hamburger */
+        .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+        .hamburger span {
+            display: block; width: 24px; height: 2px; background: var(--dark);
+            margin: 6px 0; transition: all 0.3s;
+        }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+
+        .mobile-menu {
+            display: none; position: fixed; top: 72px; left: 0; right: 0;
+            background: white; border-bottom: 1px solid var(--border);
+            padding: 24px; z-index: 999;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        .mobile-menu.active { display: block; }
+        .mobile-menu a {
+            display: block; padding: 12px 0; text-decoration: none;
+            color: var(--text); font-size: 1rem; font-weight: 500;
+            border-bottom: 1px solid var(--border);
+        }
+        .mobile-menu a:last-child { border: none; }
+        .mobile-menu .mob-cta {
+            display: block; text-align: center; background: var(--primary);
+            color: white; padding: 14px; border-radius: 50px;
+            margin-top: 16px; font-weight: 600; border: none;
+        }
+
+        /* HERO */
+        .hero {
+            padding: 140px 0 80px;
+            background: linear-gradient(180deg, var(--bg-soft) 0%, var(--bg) 100%);
+        }
+        .hero-inner {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 48px; align-items: center;
+        }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: white; border: 1px solid var(--border);
+            padding: 8px 16px; border-radius: 50px; font-size: 0.85rem;
+            font-weight: 600; color: var(--primary); margin-bottom: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .hero-badge svg { width: 18px; height: 18px; fill: #f4c430; }
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700; color: var(--dark);
+            line-height: 1.2; margin-bottom: 20px;
+        }
+        .hero-sub {
+            font-size: 1.1rem; color: var(--text-light);
+            line-height: 1.7; margin-bottom: 32px; max-width: 480px;
+        }
+        .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--primary); color: white; padding: 14px 32px;
+            border-radius: 50px; text-decoration: none; font-weight: 600;
+            font-size: 0.95rem; transition: all 0.2s; border: none; cursor: pointer;
+        }
+        .btn-primary:hover { background: var(--primary-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,82,118,0.3); }
+        .btn-secondary {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: white; color: var(--primary); padding: 14px 32px;
+            border-radius: 50px; text-decoration: none; font-weight: 600;
+            font-size: 0.95rem; border: 2px solid var(--border);
+            transition: all 0.2s; cursor: pointer;
+        }
+        .btn-secondary:hover { border-color: var(--primary); background: var(--bg-soft); }
+
+        .hero-image {
+            position: relative; border-radius: var(--radius);
+            overflow: hidden; aspect-ratio: 4/3;
+            box-shadow: var(--shadow-lg);
+        }
+        .hero-image img {
+            width: 100%; height: 100%; object-fit: cover;
+            object-position: center;
+        }
+        .hero-image::after {
+            content: ''; position: absolute; inset: 0;
+            border-radius: var(--radius);
+            border: 1px solid rgba(0,0,0,0.06);
+        }
+
+        /* WHY US */
+        .section { padding: 80px 0; }
+        .section-tag {
+            display: inline-block; font-size: 0.8rem; font-weight: 700;
+            color: var(--accent); text-transform: uppercase; letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-weight: 700; color: var(--dark);
+            margin-bottom: 16px; line-height: 1.3;
+        }
+        .section-sub {
+            font-size: 1rem; color: var(--text-light);
+            max-width: 560px; margin-bottom: 48px;
+        }
+
+        .benefits-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        .benefit-card {
+            background: white; border: 1px solid var(--border);
+            border-radius: var(--radius); overflow: hidden;
+            transition: all 0.3s; cursor: default;
+        }
+        .benefit-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: transparent; }
+        .benefit-img {
+            height: 180px; overflow: hidden;
+            background: linear-gradient(135deg, #eaf2f8, #d5e8f0);
+        }
+        .benefit-img img {
+            width: 100%; height: 100%; object-fit: cover;
+        }
+        .benefit-body { padding: 24px; }
+        .benefit-body h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem; font-weight: 600;
+            color: var(--dark); margin-bottom: 8px;
+        }
+        .benefit-body p {
+            font-size: 0.9rem; color: var(--text-light); line-height: 1.6;
+        }
+
+        /* PROCESS */
+        .process { background: var(--bg-soft); }
+        .process-steps {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 32px; text-align: center;
+        }
+        .process-step { padding: 32px 20px; }
+        .step-num {
+            width: 56px; height: 56px; border-radius: 50%;
+            background: var(--primary); color: white;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem; font-weight: 700;
+            margin: 0 auto 20px;
+        }
+        .process-step h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem; font-weight: 600;
+            color: var(--dark); margin-bottom: 8px;
+        }
+        .process-step p { font-size: 0.9rem; color: var(--text-light); }
+
+        /* NUMBERS */
+        .numbers-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 24px; text-align: center;
+        }
+        .number-item {
+            padding: 32px 16px;
+            background: white; border: 1px solid var(--border);
+            border-radius: var(--radius);
+        }
+        .number-big {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem; font-weight: 700;
+            color: var(--primary); line-height: 1;
+            margin-bottom: 8px;
+        }
+        .number-label { font-size: 0.85rem; color: var(--text-light); font-weight: 500; }
+
+        /* REVIEWS */
+        .reviews-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .review-card {
+            background: white; border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 32px;
+            transition: all 0.3s;
+        }
+        .review-card:hover { box-shadow: var(--shadow); border-color: transparent; }
+        .review-stars { color: #f4c430; font-size: 1.1rem; margin-bottom: 16px; }
+        .review-text {
+            font-size: 0.95rem; color: var(--text);
+            line-height: 1.7; margin-bottom: 20px;
+            font-style: italic;
+        }
+        .review-author {
+            font-size: 0.85rem; font-weight: 600;
+            color: var(--dark);
+        }
+        .review-time { font-size: 0.8rem; color: var(--text-light); }
+
+        /* CTA BANNER */
+        .cta-banner {
+            background: var(--dark); color: white;
+            padding: 64px 0; text-align: center;
+        }
+        .cta-banner h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-weight: 700; margin-bottom: 16px;
+        }
+        .cta-banner p {
+            font-size: 1rem; color: #aeb6bf;
+            margin-bottom: 32px; max-width: 480px; margin-inline: auto;
+        }
+        .cta-banner .btn-primary { background: var(--accent); }
+        .cta-banner .btn-primary:hover { background: var(--accent-light); }
+
+        /* FOOTER */
+        .footer {
+            padding: 40px 0; border-top: 1px solid var(--border);
+            text-align: center; font-size: 0.85rem; color: var(--text-light);
+        }
+        .footer a { color: var(--primary); text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hamburger { display: block; }
+            .hero { padding: 100px 0 60px; }
+            .hero-inner { grid-template-columns: 1fr; gap: 32px; }
+            .hero-image { max-height: 300px; }
+            .benefits-grid { grid-template-columns: 1fr; }
+            .process-steps { grid-template-columns: 1fr; gap: 16px; }
+            .numbers-grid { grid-template-columns: 1fr 1fr; }
+            .reviews-grid { grid-template-columns: 1fr; }
+            .hero-btns { flex-direction: column; }
+            .btn-primary, .btn-secondary { text-align: center; justify-content: center; }
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero-content { animation: fadeUp 0.6s ease-out; }
+        .hero-image { animation: fadeUp 0.6s ease-out 0.2s both; }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">Dr Kalaba<span>.</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Početna</a></li>
+            <li><a href="usluge.html">Usluge</a></li>
+            <li><a href="o-nama.html">O nama</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
+            <li><a href="tel:+381641151975" class="nav-cta">Zakaži pregled</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Meni">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Početna</a>
+    <a href="usluge.html">Usluge</a>
+    <a href="o-nama.html">O nama</a>
+    <a href="kontakt.html">Kontakt</a>
+    <a href="tel:+381641151975" class="mob-cta">Zakaži pregled</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="container">
+        <div class="hero-inner">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    5.0 na Google-u · 55 recenzija
+                </div>
+                <h1>55 pacijenata dalo savršenu ocenu. Tu nije slučajnost.</h1>
+                <p class="hero-sub">Stomatološka ordinacija u Šumatovačkoj 18 na Vračaru. Moderna oprema, pažljiv pristup, rezultati koji govore sami za sebe.</p>
+                <div class="hero-btns">
+                    <a href="tel:+381641151975" class="btn-primary">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                        Pozovi odmah
+                    </a>
+                    <a href="usluge.html" class="btn-secondary">Pogledaj usluge</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="photos/photo_02.jpg" alt="Stomatološka ordinacija Dr Kalaba, Šumatovačka 18, Beograd" loading="lazy">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WHY US -->
+<section class="section">
+    <div class="container">
+        <div class="section-tag">Zašto baš ovde</div>
+        <h2 class="section-title">Rezultati, ne obećanja</h2>
+        <p class="section-sub">Pacijenti pričaju o iskustvu, ne o reklamama. Evo šta ih vraća.</p>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-img">
+                    <img src="photos/photo_01.jpg" alt="Moderna stomatološka oprema" loading="lazy">
+                </div>
+                <div class="benefit-body">
+                    <h3>Oprema koja menja iskustvo</h3>
+                    <p>Savremena ordinacija sa najnovijom opremom. Svaka intervencija je preciznija, brža i udobnija.</p>
+                </div>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-img">
+                    <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80" alt="Bezbolna intervencija" loading="lazy">
+                </div>
+                <div class="benefit-body">
+                    <h3>Pacijenti kažu: nije bolelo</h3>
+                    <p>Pažljiv pristup i moderna anestezija. Čak i oni koji se boje zubara ovde se opušteno vrate.</p>
+                </div>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-img">
+                    <img src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?auto=format&fit=crop&w=600&q=80" alt="Doktor sa pacijentom" loading="lazy">
+                </div>
+                <div class="benefit-body">
+                    <h3>Doktor koji te sluša</h3>
+                    <p>Nenad kaže: „Ozbiljan profesionalac, verujem mu za bilo koji problem." Godinama se vraća.</p>
+                </div>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-img">
+                    <img src="photos/photo_03.jpg" alt="Enterijer ordinacije" loading="lazy">
+                </div>
+                <div class="benefit-body">
+                    <h3>Ambijent koji umiruje</h3>
+                    <p>Svetao, čist, moderan prostor. Mermerne zidove i novu opremu primetiš čim uđeš.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section process">
+    <div class="container">
+        <div style="text-align:center; margin-bottom:48px;">
+            <div class="section-tag">Kako do pregleda</div>
+            <h2 class="section-title">Tri koraka do zdravog osmeha</h2>
+        </div>
+        <div class="process-steps">
+            <div class="process-step">
+                <div class="step-num">1</div>
+                <h3>Pozovi</h3>
+                <p>Jedan poziv, dogovoren termin. Bez čekanja, bez komplikacija.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-num">2</div>
+                <h3>Pregled</h3>
+                <p>Detaljan pregled, jasan plan. Znaš tačno šta te čeka, koliko traje, koliko košta.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-num">3</div>
+                <h3>Rezultat</h3>
+                <p>Zdrav osmeh koji traje. Kao što Marijana kaže: „Najjbolji. Sve preporuke."</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- NUMBERS -->
+<section class="section">
+    <div class="container">
+        <div style="text-align:center; margin-bottom:48px;">
+            <div class="section-tag">Brojevi govore</div>
+            <h2 class="section-title">Reputacija izgrađena rezultatima</h2>
+        </div>
+        <div class="numbers-grid">
+            <div class="number-item">
+                <div class="number-big">5.0</div>
+                <div class="number-label">Prosečna ocena na Google-u</div>
+            </div>
+            <div class="number-item">
+                <div class="number-big">55</div>
+                <div class="number-label">Zadovoljnih recenzija</div>
+            </div>
+            <div class="number-item">
+                <div class="number-big">100%</div>
+                <div class="number-label">Ocena 5 od 5</div>
+            </div>
+            <div class="number-item">
+                <div class="number-big">0</div>
+                <div class="number-label">Negativnih recenzija</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="section" style="background: var(--bg-soft);">
+    <div class="container">
+        <div style="text-align:center; margin-bottom:48px;">
+            <div class="section-tag">Recenzije</div>
+            <h2 class="section-title">Šta kažu pacijenti</h2>
+            <p class="section-sub" style="margin-inline:auto;">Prave recenzije sa Google-a. Ništa izmišljeno, ništa preuveličano.</p>
+        </div>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">„Šta reći za čoveka koji nosi sve oko sebe. Druže, zubar, prijatelj. Profesionalac za najviše pohvale i korektan."</p>
+                <div class="review-author">Ivan Mioković</div>
+                <div class="review-time">Pre 2 meseca</div>
+            </div>
+            <div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">„Godinama idem kod dr Kalabe. On je ozbiljan profesionalac i verujem mu za bilo koji problem."</p>
+                <div class="review-author">Nenad Janković</div>
+                <div class="review-time">Pre 2 godine</div>
+            </div>
+            <div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">„Izuzetan stručnjak i izuzetno dobar čovek, neko kome možete verovati. Najbolji! Sve preporuke!"</p>
+                <div class="review-author">Marijana Đorović</div>
+                <div class="review-time">Pre 2 godine</div>
+            </div>
+        </div>
+        <div style="text-align:center; margin-top:32px;">
+            <a href="https://maps.google.com/?cid=4989428001252402247" target="_blank" class="btn-secondary">Pročitaj sve recenzije</a>
+        </div>
+    </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner">
+    <div class="container">
+        <h2>Spreman za pregled?</h2>
+        <p>Zakaži termin jednim pozivom. Bez komplikacija, bez čekanja.</p>
+        <a href="tel:+381641151975" class="btn-primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            Pozovi: 064/115-1975
+        </a>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container">
+        <p>&copy; 2026 Stomatolog Dejan Kalaba. Sva prava zadržana.</p>
+        <p style="margin-top:8px;"><small>Sajt napravio <a href="https://nikolajanjic.com">Nikola Janjić</a></small></p>
+    </div>
+</footer>
+
+<script>
+    // Nav scroll
+    window.addEventListener('scroll', () => {
+        document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 10);
+    });
+
+    // Hamburger
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+    });
+
+    // Close mobile menu on link click
+    mobileMenu.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            mobileMenu.classList.remove('active');
+        });
+    });
+</script>
+</body>
+</html>
