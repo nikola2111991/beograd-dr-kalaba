@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usluge | Stomatolog Dejan Kalaba, Beograd</title>
+    <meta name="description" content="Stomatološke usluge ordinacije Dr Dejan Kalaba. Od redovnih pregleda do estetske stomatologije. Šumatovačka 18, Vračar, Beograd.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1a5276; --primary-light: #2471a3;
+            --accent: #148f77; --accent-light: #1abc9c;
+            --dark: #1c2833; --text: #2c3e50; --text-light: #5d6d7e;
+            --bg: #ffffff; --bg-soft: #f8f9fa;
+            --border: #e8ecf0; --radius: 16px;
+            --shadow: 0 4px 24px rgba(0,0,0,0.06);
+            --shadow-lg: 0 12px 48px rgba(0,0,0,0.1);
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--bg); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+        .nav { position: fixed; top: 0; left: 0; right: 0; background: rgba(255,255,255,0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); z-index: 1000; border-bottom: 1px solid var(--border); }
+        .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
+        .nav-inner { display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; padding: 0 24px; height: 72px; }
+        .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.25rem; font-weight: 600; color: var(--primary); text-decoration: none; }
+        .nav-logo span { color: var(--accent); }
+        .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text); font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--primary); }
+        .nav-cta { background: var(--primary); color: white !important; padding: 10px 24px; border-radius: 50px; font-weight: 600; }
+        .hamburger { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+        .hamburger span { display: block; width: 24px; height: 2px; background: var(--dark); margin: 6px 0; transition: all 0.3s; }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+        .mobile-menu { display: none; position: fixed; top: 72px; left: 0; right: 0; background: white; border-bottom: 1px solid var(--border); padding: 24px; z-index: 999; box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
+        .mobile-menu.active { display: block; }
+        .mobile-menu a { display: block; padding: 12px 0; text-decoration: none; color: var(--text); font-size: 1rem; font-weight: 500; border-bottom: 1px solid var(--border); }
+        .mobile-menu a:last-child { border: none; }
+        .mobile-menu .mob-cta { display: block; text-align: center; background: var(--primary); color: white; padding: 14px; border-radius: 50px; margin-top: 16px; font-weight: 600; }
+
+        .page-hero { padding: 140px 0 60px; background: var(--bg-soft); text-align: center; }
+        .page-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 700; color: var(--dark); margin-bottom: 16px; }
+        .page-hero p { font-size: 1.1rem; color: var(--text-light); max-width: 560px; margin: 0 auto; }
+
+        .section { padding: 80px 0; }
+        .section-tag { display: inline-block; font-size: 0.8rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; }
+        .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700; color: var(--dark); margin-bottom: 48px; }
+
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .service-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: all 0.3s; }
+        .service-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: transparent; }
+        .service-img { height: 200px; overflow: hidden; background: linear-gradient(135deg, #eaf2f8, #d5e8f0); }
+        .service-img img { width: 100%; height: 100%; object-fit: cover; }
+        .service-body { padding: 24px; }
+        .service-body h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 600; color: var(--dark); margin-bottom: 10px; }
+        .service-body p { font-size: 0.9rem; color: var(--text-light); line-height: 1.7; margin-bottom: 16px; }
+        .service-cta { display: inline-flex; align-items: center; gap: 6px; color: var(--primary); font-weight: 600; font-size: 0.9rem; text-decoration: none; transition: gap 0.2s; }
+        .service-cta:hover { gap: 10px; }
+        .service-cta svg { width: 16px; height: 16px; }
+
+        .cta-banner { background: var(--dark); color: white; padding: 64px 0; text-align: center; }
+        .cta-banner h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 700; margin-bottom: 16px; }
+        .cta-banner p { font-size: 1rem; color: #aeb6bf; margin-bottom: 32px; max-width: 480px; margin-inline: auto; }
+        .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: white; padding: 14px 32px; border-radius: 50px; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.2s; }
+        .btn-primary:hover { background: var(--accent-light); transform: translateY(-2px); }
+
+        .footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; font-size: 0.85rem; color: var(--text-light); }
+        .footer a { color: var(--primary); text-decoration: none; }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hamburger { display: block; }
+            .services-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+<nav class="nav" id="nav">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">Dr Kalaba<span>.</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Početna</a></li>
+            <li><a href="usluge.html" class="active">Usluge</a></li>
+            <li><a href="o-nama.html">O nama</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
+            <li><a href="tel:+381641151975" class="nav-cta">Zakaži pregled</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Meni"><span></span><span></span><span></span></button>
+    </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Početna</a>
+    <a href="usluge.html">Usluge</a>
+    <a href="o-nama.html">O nama</a>
+    <a href="kontakt.html">Kontakt</a>
+    <a href="tel:+381641151975" class="mob-cta">Zakaži pregled</a>
+</div>
+
+<section class="page-hero">
+    <div class="container">
+        <h1>Usluge koje menjaju osmeh</h1>
+        <p>Kompletna stomatološka nega na jednom mestu. Od preventive do estetike.</p>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-img">
+                    <img src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&w=600&q=80" alt="Preventivni pregled" loading="lazy">
+                </div>
+                <div class="service-body">
+                    <h3>Redovni pregledi</h3>
+                    <p>Problem koji se uhvati na vreme košta manje i rešava se brže. Redovan pregled je najbolja investicija u zdravlje tvojih zuba.</p>
+                    <a href="tel:+381641151975" class="service-cta">Zakaži pregled <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-img">
+                    <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=600&q=80" alt="Popravka zuba" loading="lazy">
+                </div>
+                <div class="service-body">
+                    <h3>Lečenje i popravka zuba</h3>
+                    <p>Karijes, oštećenja, bolovi. Pacijenti kažu da su intervencije bezbolne i brze. Zub se popravlja, ne vadi.</p>
+                    <a href="tel:+381641151975" class="service-cta">Zakaži pregled <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-img">
+                    <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?auto=format&fit=crop&w=600&q=80" alt="Estetska stomatologija" loading="lazy">
+                </div>
+                <div class="service-body">
+                    <h3>Estetska stomatologija</h3>
+                    <p>Beljenje, fasete, korekcije. Osmeh koji ti vraća samopouzdanje. Prirodan izgled, trajan rezultat.</p>
+                    <a href="tel:+381641151975" class="service-cta">Zakaži konsultaciju <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-img">
+                    <img src="https://images.unsplash.com/photo-1629909615957-be67e4c0e7a3?auto=format&fit=crop&w=600&q=80" alt="Protetika" loading="lazy">
+                </div>
+                <div class="service-body">
+                    <h3>Protetika</h3>
+                    <p>Krunice, mostovi, proteze. Svaki rad se radi precizno, sa materijalima koji traju. Funkcija i estetika, bez kompromisa.</p>
+                    <a href="tel:+381641151975" class="service-cta">Zakaži pregled <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-img">
+                    <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=600&q=80" alt="Oralna hirurgija" loading="lazy">
+                </div>
+                <div class="service-body">
+                    <h3>Oralna hirurgija</h3>
+                    <p>Vađenje umnjaka, hirurške intervencije. Precizno, brzo, uz modernu anesteziju. Oporavak koji traje kraće nego što misliš.</p>
+                    <a href="tel:+381641151975" class="service-cta">Zakaži konsultaciju <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                </div>
+            </div>
+            <div class="service-card">
+                <div class="service-img">
+                    <img src="https://images.unsplash.com/photo-1606265752439-1f18756aa5fc?auto=format&fit=crop&w=600&q=80" alt="Dečja stomatologija" loading="lazy">
+                </div>
+                <div class="service-body">
+                    <h3>Za celu porodicu</h3>
+                    <p>Nenad dolazi godinama, i dovodi članove porodice. Ordinacija u koju se vraćaš sa celom ekipom.</p>
+                    <a href="tel:+381641151975" class="service-cta">Zakaži termin <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-banner">
+    <div class="container">
+        <h2>Ne čekaj da zaboli</h2>
+        <p>Redovan pregled sprečava 90% ozbiljnih problema. Pozovi danas.</p>
+        <a href="tel:+381641151975" class="btn-primary">Pozovi: 064/115-1975</a>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <p>&copy; 2026 Stomatolog Dejan Kalaba. Sva prava zadržana.</p>
+        <p style="margin-top:8px;"><small>Sajt napravio <a href="https://nikolajanjic.com">Nikola Janjić</a></small></p>
+    </div>
+</footer>
+
+<script>
+    window.addEventListener('scroll', () => { document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 10); });
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => { hamburger.classList.toggle('active'); mobileMenu.classList.toggle('active'); });
+    mobileMenu.querySelectorAll('a').forEach(a => { a.addEventListener('click', () => { hamburger.classList.remove('active'); mobileMenu.classList.remove('active'); }); });
+</script>
+</body>
+</html>
